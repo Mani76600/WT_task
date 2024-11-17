@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Tasks</title>
+</head>
+<body>
+ <h1>Task List</h1>
+ <form id="taskForm">
+    <label for="taskCode">Task :</label>
+    <input type="text" id="taskCode" name="taskCode">
+    <button type="submit">Add Task </button>
+ </form>
+ <h2>Task:</h2>
+ <ul id="taskList"></ul>
+ <script>
+    let taskList = [];
+
+    function addTask(taskCode) {
+      if (!taskCode) return;
+      taskList.push(taskCode);
+      displayTasks();
+    }
+
+    function displayTasks() {
+      let taskListElement = document.getElementById("taskList");
+      taskListElement.innerHTML = "";
+      for (let i = 0; i < taskList.length; i++) {
+        let taskElement = document.createElement("li");
+        taskElement.textContent = taskList[i];
+        taskListElement.appendChild(taskElement);
+      }
+    }
+
+    document.getElementById("taskForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      let taskCodeInput = document.getElementById("taskCode");
+      addTask(taskCodeInput.value);
+      taskCodeInput.value = "";
+    });
+ </script>
+</body>
+</html>
